@@ -1,7 +1,8 @@
 import { queryOptions } from "@tanstack/react-query";
+import { CitiesService } from "../services/CitiesService/CitiesService";
 
-export const CitiesQueryOptions = () =>
+export const CitiesQueryOptions =
   queryOptions({
-    queryKey: ['cities'],
-    queryFn: () =>,
-  })
+    queryKey: ["cities"],
+    queryFn: CitiesService.getCities,
+  });

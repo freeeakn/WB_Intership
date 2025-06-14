@@ -17,7 +17,6 @@ const router = createRouter({
   scrollRestoration: true,
 });
 
-// Register the router instance for type safety
 declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
@@ -47,7 +46,7 @@ function App() {
           variants={pageVariants}
           transition={pageTransition}
         >
-          <RouterProvider router={router} />
+          <RouterProvider router={router} context={{ queryClient }} />
         </motion.div>
         <ReactQueryDevtools />
       </QueryClientProvider>

@@ -10,6 +10,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"github.com/rs/cors"
 )
 
 func main() {
@@ -53,8 +54,17 @@ func main() {
 	r.HandleFunc("/cities/{id}", handlers.DeleteCity).Methods("DELETE")
 	r.HandleFunc("/cities/{id}/upload-image", handlers.UploadCityImage).Methods("POST")
 
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:5173"}, // Allow the frontend origin
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Content-Type", "Authorization"},
+		AllowCredentials: true,
+	})
+
+	handler := c.Handler(r)
+
 	srv := &http.Server{
-		Handler:      r,
+		Handler:      handler,
 		Addr:         ":8080",
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
