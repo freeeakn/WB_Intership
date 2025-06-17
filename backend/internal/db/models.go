@@ -14,4 +14,6 @@ type City struct {
 	DistanceToMoscow float64        `json:"distance_to_moscow"`
 	Population       uint64         `json:"population"`
 	ImagePath        sql.NullString `json:"image_path,omitempty"`
+	Latitude         float64        `json:"latitude"`
+	Longitude        float64        `json:"longitude"`
 }

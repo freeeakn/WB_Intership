@@ -54,6 +54,8 @@ func main() {
 	r.HandleFunc("/cities/{id}", handlers.DeleteCity).Methods("DELETE")
 	r.HandleFunc("/cities/{id}/upload-image", handlers.UploadCityImage).Methods("POST")
 
+	r.HandleFunc("/images/{id}", handlers.GetImage).Methods("GET")
+
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:5173"}, // Allow the frontend origin
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},

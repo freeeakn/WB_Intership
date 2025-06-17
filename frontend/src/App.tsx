@@ -2,7 +2,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { motion, type Transition, type Variants } from "motion/react";
+import { Toaster } from "react-hot-toast";
 
+import "leaflet/dist/leaflet.css";
 import { routeTree } from "./routeTree.gen";
 
 const queryClient = new QueryClient();
@@ -48,6 +50,7 @@ function App() {
         >
           <RouterProvider router={router} context={{ queryClient }} />
         </motion.div>
+        <Toaster position="bottom-right" reverseOrder={false} />
         <ReactQueryDevtools />
       </QueryClientProvider>
     </>

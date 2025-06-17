@@ -1,19 +1,19 @@
 import { instance } from "../../instance/instance";
-import type { City } from "../../types/types";
+import type { Region } from "../../types/types";
 import UrlBuilder from "../../utils/UrlBuilder";
 
-const PATH = "/cities";
+const PATH = "/regions";
 const { buildUrl } = new UrlBuilder(PATH);
 
-export const CitiesService = {
-  getCities: async () => {
+export const RegionsService = {
+  getRegions: async () => {
     return await instance
-      .get<City[]>(buildUrl(""))
+      .get<Region[]>(buildUrl(""))
       .then((response) => response.data);
   },
-  postCity: async (formData: FormData) => {
+  postRegions: async (name: string) => {
     return await instance
-      .post(buildUrl(""), formData)
+      .post(buildUrl(""), { name })
       .then((response) => response.data);
   },
 };
