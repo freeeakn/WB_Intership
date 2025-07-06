@@ -93,7 +93,6 @@ func CreateCity(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// Handle image upload
 		file, handler, err := r.FormFile("image")
 		var imagePath string
 		if err == nil {
@@ -117,7 +116,6 @@ func CreateCity(w http.ResponseWriter, r *http.Request) {
 			imagePath = filename
 		}
 
-		// Calculate distance to Moscow
 		moscowLat, moscowLon := 55.7558, 37.6173
 		distance := calculateDistance(moscowLat, moscowLon, city.Latitude, city.Longitude)
 		var newID uint
@@ -337,7 +335,6 @@ func UploadCityImage(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]string{"message": "Image uploaded successfully", "image_path": filename})
 }
 
-// New handler to serve images
 func GetImage(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	idStr := vars["id"]
@@ -370,7 +367,6 @@ func GetImage(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 
-	// Set content type based on file extension (basic detection)
 	ext := filepath.Ext(imagePath.String)
 	contentType := "application/octet-stream"
 	switch ext {
@@ -403,7 +399,7 @@ func mustParseFloat(s string) float64 {
 }
 
 func calculateDistance(lat1, lon1, lat2, lon2 float64) float64 {
-	const R = 6371 // Earth's radius in kilometers
+	const R = 6371
 	lat1Rad := degToRad(lat1)
 	lon1Rad := degToRad(lon1)
 	lat2Rad := degToRad(lat2)

@@ -129,14 +129,7 @@ const AddCity = () => {
 
   const createCityMutation = useMutation({
     mutationFn: async (formData: FormData) => {
-      try {
-        const response = await CitiesService.postCity(formData);
-        console.log("Response:", response); // Debug response
-        return response;
-      } catch (error) {
-        console.error("Mutation Error:", error);
-        throw error;
-      }
+      await CitiesService.postCity(formData);
     },
     onSuccess: () => {
       toast.custom((t) => (
@@ -413,7 +406,7 @@ const AddCity = () => {
               <span className="label-text">Выберите координаты на карте</span>
             </label>
             <MapContainer
-              center={[55.7558, 37.6173]} // Default to Moscow
+              center={[55.7558, 37.6173]}
               zoom={4}
               style={{ height: "400px", width: "100%" }}
             >
